@@ -9,7 +9,7 @@
 
     <style>
         :root { --bg: #000212; --primary: #3b82f6; --text: #ffffff; --glass: rgba(255,255,255,0.05); }
-        * { margin: 0; padding: 0; box-sizing: border-box; /*cursor: none;*/ }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
         /* CURSOR */
@@ -43,9 +43,6 @@
         .policy-card ul { margin-left: 20px; color: #94a3b8; }
         .policy-card li { margin-bottom: 10px; }
 
-        /* NAV */
-        .back-btn { position: fixed; top: 30px; left: 30px; color: white; text-decoration: none; display: flex; align-items: center; gap: 10px; font-weight: bold; z-index: 100; mix-blend-mode: difference;}
-        
         @media (min-width: 768px) { .sidebar { display: block; } }
     </style>
 </head>
@@ -54,59 +51,101 @@
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
-<!--  <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Home</a> -->
-
     <div class="container">
         <!-- Sticky Sidebar -->
         <div class="sidebar">
             <ul>
                 <li><a href="#intro" class="active">1. Introduction</a></li>
-                <li><a href="#data">2. Data Collection</a></li>
-                <li><a href="#permissions">3. Permissions</a></li>
-                <li><a href="#security">4. Security</a></li>
-                <li><a href="#contact">5. Contact Us</a></li>
+                <li><a href="#permissions">2. Permissions & Usage</a></li>
+                <li><a href="#data">3. Data & Storage</a></li>
+                <li><a href="#ads">4. Third-Party Services</a></li>
+                <li><a href="#security">5. Security</a></li>
+                <li><a href="#contact">6. Contact Us</a></li>
             </ul>
         </div>
 
         <!-- Main Content -->
         <div class="content">
             <h1>Privacy Policy</h1>
-            <span class="last-updated">LAST UPDATED: DECEMBER 25, 2025</span>
+            <span class="last-updated">LAST UPDATED: JANUARY 2026</span>
 
             <div id="intro" class="policy-card">
                 <h2><i class="fas fa-info-circle"></i> Introduction</h2>
-                <p>Welcome to Note Pad Pro. Your privacy is not just a policy; it's our priority. We are committed to protecting your personal information and your right to privacy. Unlike other apps, we believe your notes belong only to you.</p>
-            </div>
-
-            <div id="data" class="policy-card">
-                <h2><i class="fas fa-database"></i> Data Collection</h2>
-                <p>We believe in the "Zero-Knowledge" principle.</p>
-                <ul>
-                    <li><strong>Local Storage:</strong> All your notes are stored locally on your device's internal database (SQLite).</li>
-                    <li><strong>No Cloud Uploads:</strong> We do not upload your notes to any external server.</li>
-                    <li><strong>Backup Files:</strong> If you use the Backup feature, the JSON file is stored strictly on your device storage.</li>
-                </ul>
+                <p>
+Welcome to <strong>Note Pad Pro</strong>. We are committed to providing a secure, simple, and privacy-focused note-taking experience.  
+This app follows a <strong>local-first approach</strong>, which means your notes are stored on your device and remain under your control.
+</p>
             </div>
 
             <div id="permissions" class="policy-card">
-                <h2><i class="fas fa-key"></i> Permissions We Ask</h2>
-                <p>To provide advanced features, we need specific access:</p>
+                <h2><i class="fas fa-key"></i> Permissions We Request</h2>
+                <p>To provide advanced features, the app requires specific permissions. We only request these when you use the respective feature:</p>
                 <ul>
-                    <li><strong>Biometric:</strong> To lock/unlock the app using your Fingerprint/Lock.</li>
-                    <li><strong>Notifications:</strong> To show Sticky Notes in your status bar.</li>
-                    <li><strong>Storage:</strong> To save PDF exports and Backup files.</li>
+                    <li>
+<strong>Camera:</strong> Used only when you manually choose features such as 
+<em>OCR (Image-to-Text)</em> or <em>QR Code scanning</em>. 
+Captured images are processed locally on your device and are never uploaded to our servers.
+</li>
+                    <li>
+<strong>Display Over Other Apps (Overlay):</strong> 
+Used exclusively for the optional <em>Floating Note</em> feature, allowing you to view or edit notes while using other apps.
+</li>
+                    <li>
+<strong>Storage / Media:</strong> 
+Used to export notes as PDF, save backup files (JSON), and store shared images on your device. 
+We do not access unrelated files.
+</li>
+                    <li>
+<strong>Biometric / Fingerprint:</strong> 
+Used only to authenticate access to the app. 
+Biometric data is handled securely by the Android system and is never stored or accessed by us.
+</li>
+                    <li>
+<strong>Notifications:</strong> 
+Used for note reminders and optional sticky notifications. 
+You can disable notifications anytime from system settings.
+</li>
+                </ul>
+            </div>
+
+            <div id="data" class="policy-card">
+                <h2><i class="fas fa-database"></i> Data & Storage</h2>
+                <ul>
+                    <li><strong>Local Database:</strong> All notes, passwords, and hidden data are stored in an encrypted SQLite database inside your phone.</li>
+                    <li><strong>No Cloud Sync:</strong> We do not have access to your notes. We do not upload your content to any cloud server.</li>
+                    <li>
+<strong>Manual Backup:</strong> 
+The app allows you to manually create backup files that you may choose to store locally or upload to services like Google Drive.
+We do not manage or access these backups.
+</li>
+                </ul>
+            </div>
+
+            <div id="ads" class="policy-card">
+                <h2><i class="fas fa-ad"></i> Third-Party Services</h2>
+                <p>
+The free version of the app may display advertisements to support development.
+</p>
+<ul>
+<li>
+<strong>Start.io:</strong> 
+Used to show ads. Data collection, if any, is governed by Start.io’s own privacy policy.
+</li>
+                    <li><strong>External Tools:</strong> Features like "Cloud Tools" may open external websites (e.g., ChatGPT) inside a secure browser. These sites are governed by their own privacy policies.</li>
                 </ul>
             </div>
 
             <div id="security" class="policy-card">
                 <h2><i class="fas fa-shield-alt"></i> Security</h2>
-                <p>We use Android system-level security and biometric APIs to protect access to your notes.
-        All data remains on your device, and we do not have access to your content.</p>
+                <p>
+We use built-in Android security features such as Biometric Authentication and local data protection mechanisms.
+However, overall security also depends on your device settings and screen lock configuration.
+</p>
             </div>
 
             <div id="contact" class="policy-card">
                 <h2><i class="fas fa-envelope"></i> Contact Us</h2>
-                <p>If you have any questions about this policy, please contact us:</p>
+                <p>If you have any questions about this policy or need support, please contact us:</p>
                 <p style="color: var(--primary); font-weight: bold;">all4you598@gmail.com</p>
             </div>
         </div>
