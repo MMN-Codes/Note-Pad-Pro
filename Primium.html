@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NotepadPro Premium</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f7fb;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 420px;
+        margin: 40px auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #4CAF50;
+        margin-bottom: 10px;
+    }
+
+    p {
+        text-align: center;
+        color: #666;
+        font-size: 14px;
+    }
+
+    .input-group {
+        margin: 15px 0;
+    }
+
+    label {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+    }
+
+    .plans {
+        margin-top: 20px;
+    }
+
+    .plan {
+        border: 1px solid #ddd;
+        padding: 12px;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .plan input {
+        margin-right: 8px;
+    }
+
+    .buy-btn {
+        width: 100%;
+        padding: 14px;
+        background: #4CAF50;
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+
+    .buy-btn:hover {
+        background: #43a047;
+    }
+
+    .note {
+        font-size: 12px;
+        color: #888;
+        margin-top: 15px;
+        text-align: center;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>NotepadPro Premium 👑</h1>
+    <p>Unlock all premium features</p>
+
+    <div class="input-group">
+        <label>📱 Your Device ID</label>
+        <input type="text" id="deviceId" placeholder="Paste Device ID here">
+    </div>
+
+    <div class="plans">
+        <label>💳 Select Plan</label>
+
+        <div class="plan">
+            <input type="radio" name="plan" value="Weekly - ₹49 (7 Days)" checked>
+            Weekly – ₹49 (7 Days)
+        </div>
+
+        <div class="plan">
+            <input type="radio" name="plan" value="Half-Monthly - ₹149 (30 Days)">
+            Half-Monthly – ₹149 (30 Days)
+        </div>
+
+        <div class="plan">
+            <input type="radio" name="plan" value="Monthly - ₹299">
+            Monthly – ₹299
+        </div>
+
+        <div class="plan">
+            <input type="radio" name="plan" value="Lifetime - ₹999">
+            Lifetime – ₹999 (Forever)
+        </div>
+    </div>
+
+    <button class="buy-btn" onclick="buyNow()">Buy via WhatsApp</button>
+
+    <div class="note">
+        ⚠️ After payment, you will receive a redeem code from admin.
+    </div>
+</div>
+
+<script>
+function buyNow() {
+    var deviceId = document.getElementById("deviceId").value.trim();
+    if (deviceId === "") {
+        alert("Please paste your Device ID");
+        return;
+    }
+
+    var plan = document.querySelector('input[name="plan"]:checked').value;
+
+    var message =
+        "Hello Admin,%0A%0A" +
+        "I want to buy *NotepadPro Premium* 👑%0A%0A" +
+        "📌 Plan: *" + plan + "*%0A" +
+        "🆔 Device ID: *" + deviceId + "*";
+
+    // 🔴 CHANGE NUMBER HERE
+    var whatsappNumber = "919876543210";
+
+    var url = "https://wa.me/" + whatsappNumber + "?text=" + message;
+    window.open(url, "_blank");
+}
+</script>
+
+</body>
+</html>
