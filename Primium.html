@@ -157,7 +157,7 @@
                 </div>
 
                 <!-- Default Selected -->
-                <div class="plan-item active" id="defaultPlan" onclick="selectPlan('Monthly', '₹149', this)">
+                <div class="plan-item" id="defaultPlan" onclick="selectPlan('Monthly', '₹149', this)">
                     <div>
                         <span class="plan-name">Monthly</span>
                         <span class="plan-desc">Best Value (30 Days)</span>
@@ -211,7 +211,27 @@
         const ENTRY_UID = "entry.558356099";   // Aapka diya hua UID ID
 
         // --- STATE ---
-        let currentPlan = "Monthly (30 Days)";
+       // let currentPlan = "Monthly (30 Days)";
+        let currentPlan;
+
+// Agar app se plan aaya hai, use set karo, warna default Monthly
+if (appPlan) {
+    let days = "30 Days"; // default for Monthly
+    if(appPlan === "Weekly") days = "7 Days";
+    if(appPlan === "Yearly") days = "365 Days";
+
+    currentPlan = `${appPlan} (${days})`;
+
+    // UI me active class set karo
+    document.querySelectorAll('.plan-item').forEach(el => {
+        el.classList.remove('active'); // pehle sab remove
+        if(el.querySelector('.plan-name').innerText === appPlan) {
+            el.classList.add('active'); // app plan highlight
+        }
+    });
+} else {
+    currentPlan = "Monthly (30 Days)";
+}
         
         // 1. GET URL PARAMS (App se aaya hua data)
         const params = new URLSearchParams(window.location.search);
