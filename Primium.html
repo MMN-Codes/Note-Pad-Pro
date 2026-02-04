@@ -1,163 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>NotepadPro Premium</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Purchase | Note Pad Pro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f5f7fb;
-        margin: 0;
-        padding: 0;
-    }
+    <style>
+        :root { --bg: #050505; --card-bg: #121212; --accent: #FFD700; --text: #ffffff; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; }
+        body { background-color: var(--bg); color: var(--text); padding: 20px; display: flex; justify-content: center; }
 
-    .container {
-        max-width: 420px;
-        margin: 40px auto;
-        background: #fff;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-    }
+        .container { max-width: 500px; width: 100%; }
 
-    h1 {
-        text-align: center;
-        color: #4CAF50;
-        margin-bottom: 10px;
-    }
+        /* HEADER */
+        .header { text-align: center; margin-bottom: 30px; }
+        .logo { width: 80px; margin-bottom: 10px; border-radius: 20px; box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); }
+        .title { font-size: 24px; font-weight: 700; color: var(--accent); }
+        .subtitle { color: #888; font-size: 14px; }
 
-    p {
-        text-align: center;
-        color: #666;
-        font-size: 14px;
-    }
+        /* STEPS CARDS */
+        .step-card {
+            background: var(--card-bg); border: 1px solid #333;
+            border-radius: 16px; padding: 20px; margin-bottom: 20px;
+            position: relative; overflow: hidden;
+        }
+        .step-badge {
+            background: var(--accent); color: #000; font-weight: bold;
+            padding: 4px 12px; border-radius: 20px; font-size: 12px;
+            display: inline-block; margin-bottom: 10px;
+        }
 
-    .input-group {
-        margin: 15px 0;
-    }
+        /* DETAILS GRID */
+        .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+        .detail-box { background: #1a1a1a; padding: 10px; border-radius: 8px; }
+        .detail-label { font-size: 12px; color: #888; display: block; }
+        .detail-val { font-size: 14px; font-weight: bold; color: #fff; display: block; word-break: break-all;}
 
-    label {
-        font-weight: bold;
-        font-size: 14px;
-    }
+        /* PAYMENT SECTION */
+        .upi-box {
+            background: #222; border: 1px dashed #555; border-radius: 12px;
+            padding: 15px; display: flex; justify-content: space-between; align-items: center;
+            margin-top: 10px; cursor: pointer; transition: 0.2s;
+        }
+        .upi-box:active { background: #333; border-color: var(--accent); }
+        .qr-placeholder {
+            width: 100%; height: 200px; background: #fff; border-radius: 12px;
+            display: flex; justify-content: center; align-items: center; margin-top: 15px;
+        }
+        .qr-placeholder img { width: 100%; height: 100%; object-fit: contain; }
 
-    input {
-        width: 100%;
-        padding: 12px;
-        margin-top: 6px;
-        border-radius: 8px;
-        border: 1px solid #ccc;
-        font-size: 15px;
-    }
+        /* BUTTONS */
+        .btn {
+            width: 100%; padding: 15px; border: none; border-radius: 12px;
+            font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            text-decoration: none;
+        }
+        .btn-primary { background: linear-gradient(45deg, #FFD700, #FFB300); color: #000; }
+        .btn-whatsapp { background: #25D366; color: #fff; margin-top: 10px; }
+        
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.02); } 100% { transform: scale(1); } }
 
-    .plans {
-        margin-top: 20px;
-    }
-
-    .plan {
-        border: 1px solid #ddd;
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 10px;
-        cursor: pointer;
-    }
-
-    .plan input {
-        margin-right: 8px;
-    }
-
-    .buy-btn {
-        width: 100%;
-        padding: 14px;
-        background: #4CAF50;
-        border: none;
-        color: #fff;
-        font-size: 16px;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-top: 15px;
-    }
-
-    .buy-btn:hover {
-        background: #43a047;
-    }
-
-    .note {
-        font-size: 12px;
-        color: #888;
-        margin-top: 15px;
-        text-align: center;
-    }
-</style>
+        .note { font-size: 12px; color: #666; text-align: center; margin-top: 20px; line-height: 1.5; }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
-    <h1>NotepadPro Premium 👑</h1>
-    <p>Unlock all premium features</p>
+    <div class="container">
+        <div class="header">
+            <!-- APNA LOGO LINK YAHAN DALEIN -->
+            <img src="https://via.placeholder.com/150" alt="Logo" class="logo">
+            <div class="title">Note Pad Pro Premium</div>
+            <div class="subtitle">Secure Payment Gateway</div>
+        </div>
 
-    <div class="input-group">
-        <label>📱 Your Device ID</label>
-        <input type="text" id="deviceId" placeholder="Paste Device ID here">
+        <!-- STEP 1: VERIFY DETAILS -->
+        <div class="step-card">
+            <span class="step-badge">STEP 1</span>
+            <h3>Confirm Details</h3>
+            <div class="details-grid">
+                <div class="detail-box">
+                    <span class="detail-label">PLAN SELECTED</span>
+                    <span class="detail-val" id="dispPlan">Loading...</span>
+                </div>
+                <div class="detail-box">
+                    <span class="detail-label">DEVICE ID</span>
+                    <span class="detail-val" id="dispUid">Loading...</span>
+                </div>
+            </div>
+            <p style="font-size: 12px; color: #888; margin-top: 10px;">*Details auto-fetched from app.</p>
+        </div>
+
+        <!-- STEP 2: MAKE PAYMENT -->
+        <div class="step-card">
+            <span class="step-badge">STEP 2</span>
+            <h3>Make Payment</h3>
+            <p style="color:#aaa; font-size:14px; margin-top:5px;">Scan QR or Copy UPI ID to pay.</p>
+
+            <!-- QR CODE IMAGE (YAHAN APNA QR DALNA) -->
+            <div class="qr-placeholder">
+                <img src="YOUR_QR_CODE_IMAGE_URL_HERE" alt="Payment QR">
+            </div>
+
+            <!-- UPI ID (CLICK TO COPY) -->
+            <div class="upi-box" onclick="copyUPI()">
+                <div>
+                    <span style="display:block; font-size:10px; color:#888;">TAP TO COPY UPI</span>
+                    <!-- APNI UPI ID YAHAN LIKHO -->
+                    <span id="upiId" style="font-weight:bold; font-size:16px;">yourname@upi</span>
+                </div>
+                <i class="fas fa-copy" style="color: var(--accent);"></i>
+            </div>
+        </div>
+
+        <!-- STEP 3: SUBMIT PROOF -->
+        <div class="step-card">
+            <span class="step-badge">STEP 3</span>
+            <h3>Activation</h3>
+            <p style="color:#aaa; font-size:14px; margin-top:5px;">After payment, click below to auto-fill the form. You will receive the code via Email instantly.</p>
+
+            <a href="#" id="btnForm" class="btn btn-primary pulse">
+                <i class="fas fa-bolt"></i> VERIFY & GET CODE
+            </a>
+            
+            <a href="#" id="btnWhatsapp" class="btn btn-whatsapp">
+                <i class="fab fa-whatsapp"></i> Help / Contact Admin
+            </a>
+        </div>
+
+        <div class="note">
+            Note: License is non-refundable and tied to your Device ID.<br>
+            © 2026 MMN Developers
+        </div>
     </div>
 
-    <div class="plans">
-        <label>💳 Select Plan</label>
+    <script>
+        // 1. Get Parameters from URL (App se jo aaye)
+        const params = new URLSearchParams(window.location.search);
+        const uid = params.get('uid') || "Unknown";
+        const plan = params.get('plan') || "Monthly";
 
-        <div class="plan">
-            <input type="radio" name="plan" value="Weekly - ₹49 (7 Days)" checked>
-            Weekly – ₹49 (7 Days)
-        </div>
+        // 2. Display on Screen
+        document.getElementById('dispUid').innerText = uid;
+        document.getElementById('dispPlan').innerText = plan;
 
-        <div class="plan">
-            <input type="radio" name="plan" value="Half-Monthly - ₹149 (30 Days)">
-            Half-Monthly – ₹149 (30 Days)
-        </div>
+        // 3. COPY UPI FUNCTION
+        function copyUPI() {
+            const upiText = document.getElementById('upiId').innerText;
+            navigator.clipboard.writeText(upiText).then(() => {
+                alert("UPI ID Copied! " + upiText);
+            });
+        }
 
-        <div class="plan">
-            <input type="radio" name="plan" value="Monthly - ₹299">
-            Monthly – ₹299
-        </div>
+        // 4. GOOGLE FORM AUTO-FILL LOGIC (MAGIC 🪄)
+        // Yahan aapko apne Google Form ke Entry IDs dalne honge
+        // Kaise milenge? Niche instructions hain.
+        
+        const FORM_ID = "YOUR_GOOGLE_FORM_ID"; // e.g. 1FAIpQLSe...
+        const ENTRY_ID_DEVICE = "entry.123456789"; // Replace with actual ID
+        const ENTRY_ID_PLAN = "entry.987654321";   // Replace with actual ID
+        
+        const formLink = `https://docs.google.com/forms/d/e/${FORM_ID}/viewform?${ENTRY_ID_DEVICE}=${uid}&${ENTRY_ID_PLAN}=${plan}`;
+        
+        document.getElementById('btnForm').href = formLink;
 
-        <div class="plan">
-            <input type="radio" name="plan" value="Lifetime - ₹999">
-            Lifetime – ₹999 (Forever)
-        </div>
-    </div>
+        // WhatsApp Link
+        document.getElementById('btnWhatsapp').href = "https://wa.me/919876543210?text=Issue with Premium for ID: " + uid;
 
-    <button class="buy-btn" onclick="buyNow()">Buy via WhatsApp</button>
-
-    <div class="note">
-        ⚠️ After payment, you will receive a redeem code from admin.
-    </div>
-</div>
-
-<script>
-function buyNow() {
-    var deviceId = document.getElementById("deviceId").value.trim();
-    if (deviceId === "") {
-        alert("Please paste your Device ID");
-        return;
-    }
-
-    var plan = document.querySelector('input[name="plan"]:checked').value;
-
-    var message =
-        "Hello Admin,%0A%0A" +
-        "I want to buy *NotepadPro Premium* 👑%0A%0A" +
-        "📌 Plan: *" + plan + "*%0A" +
-        "🆔 Device ID: *" + deviceId + "*";
-
-    // 🔴 CHANGE NUMBER HERE
-    var whatsappNumber = "919876543210";
-
-    var url = "https://wa.me/" + whatsappNumber + "?text=" + message;
-    window.open(url, "_blank");
-}
-</script>
-
+    </script>
 </body>
 </html>
