@@ -148,7 +148,7 @@
             <!-- STEP 2: SELECT PLAN -->
             <span class="step-label">02. SELECT PLAN</span>
             <div class="plans-grid">
-                <div class="plan-item" onclick="selectPlan('Weekly', '₹49', this)">
+                <div class="plan-item" id="planWeekly" onclick="selectPlan('Weekly', '₹49', this)">
                     <div>
                         <span class="plan-name">Weekly</span>
                         <span class="plan-desc">7 Days Access</span>
@@ -157,7 +157,7 @@
                 </div>
 
                 <!-- Default Selected -->
-                <div class="plan-item" id="defaultPlan" onclick="selectPlan('Monthly', '₹149', this)">
+                <div class="plan-item active" id="planMonthly" onclick="selectPlan('Monthly', '₹149', this)">
                     <div>
                         <span class="plan-name">Monthly</span>
                         <span class="plan-desc">Best Value (30 Days)</span>
@@ -165,7 +165,7 @@
                     <div class="plan-price">₹149</div>
                 </div>
 
-                <div class="plan-item" onclick="selectPlan('Yearly', '₹999', this)">
+                <div class="plan-item" id="planYearly" onclick="selectPlan('Yearly', '₹999', this)">
                     <div>
                         <span class="plan-name">Yearly</span>
                         <span class="plan-desc">365 Days Access</span>
@@ -211,32 +211,29 @@
         const ENTRY_UID = "entry.558356099";   // Aapka diya hua UID ID
 
         // --- STATE ---
-       // let currentPlan = "Monthly (30 Days)";
-        let currentPlan;
-
-// Agar app se plan aaya hai, use set karo, warna default Monthly
-if (appPlan) {
-    let days = "30 Days"; // default for Monthly
-    if(appPlan === "Weekly") days = "7 Days";
-    if(appPlan === "Yearly") days = "365 Days";
-
-    currentPlan = `${appPlan} (${days})`;
-
-    // UI me active class set karo
-    document.querySelectorAll('.plan-item').forEach(el => {
-        el.classList.remove('active'); // pehle sab remove
-        if(el.querySelector('.plan-name').innerText === appPlan) {
-            el.classList.add('active'); // app plan highlight
-        }
-    });
-} else {
-    currentPlan = "Monthly (30 Days)";
-}
+        let currentPlan = "Monthly (30 Days)";
         
         // 1. GET URL PARAMS (App se aaya hua data)
         const params = new URLSearchParams(window.location.search);
         const appUid = params.get('uid');
         const appPlan = params.get('plan');
+
+        // --- NEW CODE: AUTO SELECT PLAN ---
+if (appPlan) {
+    // String ko saaf karo (Case sensitive na ho)
+    let planCheck = appPlan.trim().toLowerCase();
+
+    if (planCheck.includes("weekly")) {
+        document.getElementById('planWeekly').click();
+    } 
+    else if (planCheck.includes("lifetime") || planCheck.includes("yearly")) {
+        document.getElementById('planYearly').click();
+    } 
+    else {
+        // Default Monthly (Already active hai, par safe side click kar do)
+        document.getElementById('planMonthly').click();
+    }
+}
 
         // 2. SET INITIAL DATA
         const uidDisplay = document.getElementById('displayUid');
