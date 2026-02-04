@@ -1,303 +1,322 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Note Pad Pro – Premium Upgrade</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade to Premium | Note Pad Pro</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700;800&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #000212;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --gold: #FFD700;
+            --gold-glow: rgba(255, 215, 0, 0.3);
+            --text-main: #ffffff;
+            --text-muted: #94a3b8;
+        }
 
-<style>
-:root{
-  --bg:#020617;
-  --card:#020617dd;
-  --border:rgba(255,255,255,.08);
-  --blue:#3b82f6;
-  --cyan:#06b6d4;
-  --purple:#8b5cf6;
-  --text:#e5e7eb;
-  --muted:#94a3b8;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+        body { background-color: var(--bg); color: var(--text-main); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
 
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'Plus Jakarta Sans',sans-serif;
-  background:radial-gradient(1200px 600px at 20% -10%,rgba(59,130,246,.15),transparent),
-             radial-gradient(800px 500px at 90% 10%,rgba(139,92,246,.15),transparent),
-             var(--bg);
-  color:var(--text);
-  min-height:100vh;
-}
+        /* BACKGROUND & CURSOR */
+        #canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .cursor, .cursor-dot { pointer-events: none; position: fixed; z-index: 9999; border-radius: 50%; }
+        .cursor { width: 30px; height: 30px; border: 1px solid rgba(255,215,0, 0.5); transition: 0.1s; mix-blend-mode: difference; }
+        .cursor-dot { width: 6px; height: 6px; background: var(--gold); }
 
-/* ===== CONTAINER ===== */
-.wrapper{
-  max-width:1100px;
-  margin:auto;
-  padding:80px 20px 60px;
-}
+        /* LAYOUT */
+        .container {
+            max-width: 600px; margin: 50px auto; padding: 20px;
+            animation: slideUp 0.8s ease-out;
+        }
 
-/* ===== HEADER ===== */
-.header{
-  text-align:center;
-  margin-bottom:60px;
-}
-.badge{
-  display:inline-block;
-  padding:6px 14px;
-  border-radius:20px;
-  border:1px solid var(--blue);
-  color:var(--blue);
-  font-size:.8rem;
-  letter-spacing:.5px;
-  margin-bottom:16px;
-}
-.header h1{
-  font-size:3rem;
-  line-height:1.1;
-  margin-bottom:14px;
-}
-.header p{
-  color:var(--muted);
-  font-size:1.1rem;
-}
+        /* HEADER */
+        .header { text-align: center; margin-bottom: 40px; }
+        .crown-icon { font-size: 3rem; color: var(--gold); filter: drop-shadow(0 0 15px var(--gold-glow)); margin-bottom: 10px; animation: float 3s infinite ease-in-out; }
+        h1 { font-size: 2.5rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { color: var(--text-muted); font-size: 1rem; }
 
-/* ===== GLASS CARD ===== */
-.card{
-  background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.01));
-  border:1px solid var(--border);
-  border-radius:28px;
-  padding:40px;
-  backdrop-filter:blur(16px);
-  box-shadow:0 40px 100px rgba(0,0,0,.6);
-}
+        /* GLASS CARD */
+        .glass-card {
+            background: var(--card-bg); backdrop-filter: blur(20px);
+            border: 1px solid var(--border); border-radius: 24px;
+            padding: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
 
-/* ===== INFO GRID ===== */
-.info-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:24px;
-  margin-bottom:40px;
-}
-.info{
-  padding:22px;
-  border-radius:20px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.02);
-}
-.info span{
-  font-size:.75rem;
-  color:var(--muted);
-}
-.info h3{
-  margin-top:6px;
-  font-size:1.2rem;
-  word-break:break-all;
-}
+        /* STEP LABELS */
+        .step-label {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--gold); font-weight: 700; margin-bottom: 10px; display: block;
+        }
 
-/* ===== PLANS ===== */
-.plans{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:24px;
-  margin-bottom:40px;
-}
-.plan{
-  border:1px solid var(--border);
-  border-radius:24px;
-  padding:30px;
-  background:rgba(255,255,255,.02);
-  position:relative;
-  transition:.35s;
-}
-.plan:hover{
-  transform:translateY(-8px);
-  border-color:var(--blue);
-}
-.plan.popular::before{
-  content:"MOST POPULAR";
-  position:absolute;
-  top:-12px;
-  left:50%;
-  transform:translateX(-50%);
-  background:linear-gradient(90deg,var(--blue),var(--purple));
-  color:white;
-  font-size:.65rem;
-  padding:4px 10px;
-  border-radius:20px;
-}
-.plan h4{
-  font-size:1.3rem;
-}
-.price{
-  font-size:2.4rem;
-  font-weight:800;
-  margin:10px 0;
-}
-.price span{
-  font-size:.9rem;
-  color:var(--muted);
-}
-.plan ul{
-  list-style:none;
-  margin-top:14px;
-}
-.plan li{
-  margin:8px 0;
-  font-size:.95rem;
-}
-.plan li i{
-  color:var(--blue);
-  margin-right:6px;
-}
+        /* DEVICE ID BOX */
+        .device-box {
+            background: rgba(0,0,0,0.3); border: 1px dashed var(--border);
+            padding: 15px; border-radius: 12px; display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 30px;
+        }
+        .uid-text { font-family: monospace; font-size: 1.1rem; color: #fff; letter-spacing: 1px; }
 
-/* ===== CTA ===== */
-.actions{
-  text-align:center;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  padding:16px 36px;
-  border-radius:50px;
-  font-weight:700;
-  font-size:1rem;
-  text-decoration:none;
-  color:white;
-  background:linear-gradient(90deg,var(--blue),var(--purple));
-  box-shadow:0 0 30px rgba(59,130,246,.45);
-  transition:.3s;
-}
-.btn:hover{
-  transform:scale(1.05);
-}
-.sub{
-  margin-top:14px;
-  font-size:.85rem;
-  color:var(--muted);
-}
+        /* PLAN SELECTION */
+        .plans-grid { display: grid; gap: 15px; margin-bottom: 30px; }
+        .plan-item {
+            background: rgba(255,255,255,0.05); border: 1px solid transparent;
+            padding: 15px 20px; border-radius: 16px; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: 0.3s;
+        }
+        .plan-item:hover { background: rgba(255,255,255,0.1); }
+        .plan-item.active {
+            border-color: var(--gold); background: rgba(255, 215, 0, 0.1);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+        }
+        .plan-name { font-weight: 600; display: block; }
+        .plan-desc { font-size: 0.8rem; color: var(--text-muted); }
+        .plan-price { font-weight: 800; font-size: 1.2rem; color: var(--gold); }
 
-/* ===== FOOTER ===== */
-footer{
-  margin-top:60px;
-  text-align:center;
-  font-size:.8rem;
-  color:var(--muted);
-}
+        /* PAYMENT QR */
+        .qr-section { text-align: center; margin-bottom: 30px; }
+        .qr-box {
+            width: 200px; height: 200px; background: white; border-radius: 16px;
+            margin: 0 auto 15px; padding: 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .qr-box img { width: 100%; height: 100%; object-fit: contain; }
+        
+        .upi-copy {
+            background: #222; border: 1px solid var(--border); padding: 10px 20px;
+            border-radius: 50px; display: inline-flex; align-items: center; gap: 10px;
+            cursor: pointer; transition: 0.2s;
+        }
+        .upi-copy:hover { border-color: var(--gold); color: var(--gold); }
 
-@media(max-width:768px){
-  .header h1{font-size:2.3rem}
-}
-</style>
+        /* ACTION BUTTON */
+        .btn-verify {
+            width: 100%; padding: 18px; border-radius: 16px; border: none;
+            background: linear-gradient(135deg, var(--gold), #FFA000);
+            color: black; font-weight: 800; font-size: 1.1rem;
+            text-transform: uppercase; cursor: pointer; text-decoration: none;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+            transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .btn-verify:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(255, 215, 0, 0.4); }
+        
+        /* FOOTER */
+        .footer-links { text-align: center; margin-top: 30px; font-size: 0.9rem; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; margin: 0 10px; }
+        .footer-links a:hover { color: var(--gold); }
+
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .container { margin: 20px auto; padding: 15px; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="wrapper">
+    <canvas id="canvas"></canvas>
+    <div class="cursor"></div>
+    <div class="cursor-dot"></div>
 
-  <!-- HEADER -->
-  <div class="header">
-    <div class="badge">Secure Premium Upgrade</div>
-    <h1>Unlock Note Pad Pro</h1>
-    <p>One-time upgrade · No ads · Lifetime access</p>
-  </div>
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-crown crown-icon"></i>
+            <h1>Premium Access</h1>
+            <p class="subtitle">Unlock the full power of Note Pad Pro</p>
+        </div>
 
-  <!-- MAIN CARD -->
-  <div class="card">
+        <div class="glass-card">
+            
+            <!-- STEP 1: DEVICE ID -->
+            <span class="step-label">01. YOUR DEVICE ID</span>
+            <div class="device-box">
+                <div>
+                    <div style="font-size: 0.8rem; color: #888;">Linked to Device:</div>
+                    <div class="uid-text" id="displayUid">Detecting...</div>
+                </div>
+                <i class="fas fa-mobile-alt" style="color: #555;"></i>
+            </div>
 
-    <!-- USER INFO -->
-    <div class="info-grid">
-      <div class="info">
-        <span>Your Device ID</span>
-        <h3 id="uid">Fetching…</h3>
-      </div>
-      <div class="info">
-        <span>Selected Plan</span>
-        <h3 id="plan">Monthly</h3>
-      </div>
-      <div class="info">
-        <span>Source</span>
-        <h3>Android App</h3>
-      </div>
+            <!-- STEP 2: SELECT PLAN -->
+            <span class="step-label">02. SELECT PLAN</span>
+            <div class="plans-grid">
+                <div class="plan-item" onclick="selectPlan('Weekly', '₹49', this)">
+                    <div>
+                        <span class="plan-name">Weekly</span>
+                        <span class="plan-desc">7 Days Access</span>
+                    </div>
+                    <div class="plan-price">₹49</div>
+                </div>
+
+                <!-- Default Selected -->
+                <div class="plan-item active" id="defaultPlan" onclick="selectPlan('Monthly', '₹149', this)">
+                    <div>
+                        <span class="plan-name">Monthly</span>
+                        <span class="plan-desc">Best Value (30 Days)</span>
+                    </div>
+                    <div class="plan-price">₹149</div>
+                </div>
+
+                <div class="plan-item" onclick="selectPlan('Yearly', '₹999', this)">
+                    <div>
+                        <span class="plan-name">Yearly</span>
+                        <span class="plan-desc">365 Days Access</span>
+                    </div>
+                    <div class="plan-price">₹999</div>
+                </div>
+            </div>
+
+            <!-- STEP 3: PAYMENT -->
+            <span class="step-label">03. SCAN TO PAY</span>
+            <div class="qr-section">
+                <div class="qr-box">
+                    <!-- YAHAN APNA QR CODE KA IMAGE LINK DAALO -->
+                    <img src="https://via.placeholder.com/200x200.png?text=YOUR+QR+HERE" alt="Payment QR">
+                </div>
+                
+                <div class="upi-copy" onclick="copyUPI()">
+                    <!-- YAHAN APNA UPI ID LIKHO -->
+                    <span id="upiId">yourname@upi</span>
+                    <i class="fas fa-copy"></i>
+                </div>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Click ID to Copy. Screenshot your payment.</p>
+            </div>
+
+            <!-- STEP 4: ACTION -->
+            <button onclick="submitForm()" class="btn-verify">
+                <i class="fas fa-bolt"></i> VERIFY & GET CODE
+            </button>
+
+        </div>
+
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+            <a href="contact.html">Support</a>
+        </div>
     </div>
 
-    <!-- PLANS -->
-    <div class="plans">
-      <div class="plan">
-        <h4>Weekly</h4>
-        <div class="price">₹49 <span>/ week</span></div>
-        <ul>
-          <li><i class="fa fa-check"></i>All premium features</li>
-          <li><i class="fa fa-check"></i>Instant activation</li>
-        </ul>
-      </div>
+    <script>
+        // --- CONFIGURATION ---
+        const GOOGLE_FORM_ID = "1FAIpQLSdlP_BNuXAuT7sMkXYbs3xvcLilyeNoHd05qzj-DF0CqOc_AA";
+        const ENTRY_PLAN = "entry.1960943257"; // Aapka diya hua Plan ID
+        const ENTRY_UID = "entry.558356099";   // Aapka diya hua UID ID
 
-      <div class="plan popular">
-        <h4>Monthly</h4>
-        <div class="price">₹149 <span>/ month</span></div>
-        <ul>
-          <li><i class="fa fa-check"></i>Best value</li>
-          <li><i class="fa fa-check"></i>Priority support</li>
-        </ul>
-      </div>
+        // --- STATE ---
+        let currentPlan = "Monthly (30 Days)";
+        
+        // 1. GET URL PARAMS (App se aaya hua data)
+        const params = new URLSearchParams(window.location.search);
+        const appUid = params.get('uid');
+        const appPlan = params.get('plan');
 
-      <div class="plan">
-        <h4>Lifetime</h4>
-        <div class="price">₹499 <span>one-time</span></div>
-        <ul>
-          <li><i class="fa fa-check"></i>No expiry</li>
-          <li><i class="fa fa-check"></i>Future updates free</li>
-        </ul>
-      </div>
-    </div>
+        // 2. SET INITIAL DATA
+        const uidDisplay = document.getElementById('displayUid');
+        if (appUid) {
+            uidDisplay.innerText = appUid;
+        } else {
+            uidDisplay.innerText = "WEB-USER-" + Math.floor(Math.random() * 1000);
+            // Agar app se nahi aaya, toh random dikhao (testing ke liye)
+        }
 
-    <!-- ACTION -->
-    <div class="actions">
-      <a id="buyBtn" class="btn">
-        <i class="fa-solid fa-lock"></i> Proceed to Secure Payment
-      </a>
-      <div class="sub">Device ID is auto-linked · No manual entry required</div>
-    </div>
+        // Agar App ne plan bheja hai, toh use select karo (Optional logic)
+        // Abhi default Monthly rakha hai
 
-  </div>
+        // 3. PLAN SELECTION LOGIC
+        function selectPlan(name, price, element) {
+            // UI Update
+            document.querySelectorAll('.plan-item').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
 
-  <footer>
-    © 2026 Note Pad Pro · Built by MMN
-  </footer>
+            // Set Data
+            let days = "7 Days";
+            if(name === "Monthly") days = "30 Days";
+            if(name === "Yearly") days = "365 Days";
+            
+            currentPlan = `${name} (${days})`;
+        }
 
-</div>
+        // 4. COPY UPI
+        function copyUPI() {
+            const upi = document.getElementById('upiId').innerText;
+            navigator.clipboard.writeText(upi).then(() => {
+                alert("UPI ID Copied: " + upi);
+            });
+        }
 
-<script>
-/* ===== URL PARAMS ===== */
-const params = new URLSearchParams(window.location.search);
-const uid = params.get('uid');
-const plan = params.get('plan') || 'Monthly';
+        // 5. SUBMIT TO GOOGLE FORM (MAGIC LINK) 🪄
+        function submitForm() {
+            const finalUid = uidDisplay.innerText;
+            
+            // Link Construction
+            const targetUrl = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/viewform?usp=pp_url&${ENTRY_PLAN}=${encodeURIComponent(currentPlan)}&${ENTRY_UID}=${encodeURIComponent(finalUid)}`;
+            
+            // Redirect
+            window.location.href = targetUrl;
+        }
 
-/* SECURITY CHECK */
-if(!uid){
-  document.body.innerHTML =
-  "<h2 style='color:white;text-align:center;margin-top:20%'>Please open this page from the app only.</h2>";
-}
+        // --- PARTICLES & CURSOR (SAME AS INDEX.HTML) ---
+        const cursor = document.querySelector('.cursor');
+        const cursorDot = document.querySelector('.cursor-dot');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            cursorDot.style.left = e.clientX + 'px';
+            cursorDot.style.top = e.clientY + 'px';
+        });
 
-/* SET VALUES */
-document.getElementById("uid").innerText = uid;
-document.getElementById("plan").innerText =
-  plan.charAt(0).toUpperCase()+plan.slice(1);
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particlesArray = [];
 
-/* GOOGLE FORM / PAYMENT LINK */
-const FORM_ID = "YOUR_FORM_ID";
-const ENTRY_UID = "entry.123456";
-const ENTRY_PLAN = "entry.654321";
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = (Math.random() * 0.5) - 0.25;
+                this.speedY = (Math.random() * 0.5) - 0.25;
+                this.color = '#FFD700'; // Gold particles
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = 0.5;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
 
-const formURL =
-`https://docs.google.com/forms/d/e/${FORM_ID}/viewform?${ENTRY_UID}=${encodeURIComponent(uid)}&${ENTRY_PLAN}=${encodeURIComponent(plan)}`;
+        function initParticles() {
+            for (let i = 0; i < 50; i++) particlesArray.push(new Particle());
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animateParticles);
+        }
+        initParticles();
+        animateParticles();
 
-document.getElementById("buyBtn").onclick = ()=>{
-  window.location.href = formURL;
-};
-</script>
-
+    </script>
 </body>
 </html>
