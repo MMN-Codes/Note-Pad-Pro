@@ -254,6 +254,10 @@
                 </div>
                 <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Click ID to Copy. Screenshot your payment.</p>
             </div>
+            <!-- DIRECT UPI PAYMENT BUTTON -->
+<a id="btnPayNow" href="#" class="btn" style="background: #2563EB; color: white; margin-bottom: 15px;">
+    <i class="fas fa-wallet"></i> PAY VIA UPI APP
+</a>
 
             <!-- 🔽 ADD HERE -->
 <!-- <span class="step-label">04. INSTRUCTIONS</span>
@@ -371,6 +375,9 @@ if (appPlan) {
         // Agar App ne plan bheja hai, toh use select karo (Optional logic)
         // Abhi default Monthly rakha hai
 
+        const MY_UPI_ID = "yourname@upi"; 
+const MY_NAME = "NotePad Pro";
+
         // 3. PLAN SELECTION LOGIC
         function selectPlan(name, price, element) {
             // UI Update
@@ -383,6 +390,18 @@ if (appPlan) {
             if(name === "Yearly") days = "365 Days";
             
             currentPlan = `${name} (${days})`;
+
+            let amount = price.replace('₹', '').trim();
+    
+    // 2. UPI Link banao
+    // pa = Payee Address (ID), pn = Payee Name, am = Amount, tn = Transaction Note, cu = Currency
+    let upiLink = `upi://pay?pa=${MY_UPI_ID}&pn=${MY_NAME}&am=${amount}&tn=Premium ${name}&cu=INR`;
+    
+    // 3. Button par link set karo
+    document.getElementById('btnPayNow').href = upiLink;
+    
+    // Button ka text bhi update kar sakte ho (Optional)
+    document.getElementById('btnPayNow').innerHTML = `<i class="fas fa-wallet"></i> PAY ₹${amount} NOW`;
         }
 
         // 4. COPY UPI
@@ -464,6 +483,8 @@ const verifyBtn = document.getElementById('verifyBtn');
 termsCheckbox.addEventListener('change', () => {
     verifyBtn.disabled = !termsCheckbox.checked;
 });
+        // Default Monthly (₹149) set kar do
+document.getElementById('btnPayNow').href = `upi://pay?pa=${MY_UPI_ID}&pn=${MY_NAME}&am=149&tn=Premium Monthly&cu=INR`;
 
     </script>
 </body>
