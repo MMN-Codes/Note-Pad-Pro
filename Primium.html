@@ -158,6 +158,31 @@
     margin-bottom: 6px;
     line-height: 1.4;
 }
+        .terms-confirm {
+    margin: 20px 0;
+}
+
+.terms-check {
+    display: flex;
+    gap: 12px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.terms-check input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--gold);
+    cursor: pointer;
+}
+        .btn-verify:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+        }
     </style>
 </head>
 <body>
@@ -274,11 +299,23 @@
             <li>Violation may lead to permanent ban</li>
         </ul>
     </details>
+    <!-- TERMS CONFIRMATION -->
+<div class="terms-confirm">
+    <label class="terms-check">
+        <input type="checkbox" id="agreeTerms">
+        <span>
+            I have read and agree to the
+            <strong>Terms & Conditions</strong>,
+            <strong>Privacy Policy</strong> and
+            <strong>Payment Instructions</strong>
+        </span>
+    </label>
+</div>
 
 </div>
 
             <!-- STEP 4: ACTION -->
-            <button onclick="submitForm()" class="btn-verify">
+            <button onclick="submitForm()" class="btn-verify" id="verifyBtn" disabled>
                 <i class="fas fa-bolt"></i> VERIFY & GET CODE
             </button>
 
@@ -420,6 +457,13 @@ if (appPlan) {
         }
         initParticles();
         animateParticles();
+
+        const termsCheckbox = document.getElementById('agreeTerms');
+const verifyBtn = document.getElementById('verifyBtn');
+
+termsCheckbox.addEventListener('change', () => {
+    verifyBtn.disabled = !termsCheckbox.checked;
+});
 
     </script>
 </body>
