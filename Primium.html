@@ -483,6 +483,11 @@ const verifyBtn = document.getElementById('verifyBtn');
 termsCheckbox.addEventListener('change', () => {
     verifyBtn.disabled = !termsCheckbox.checked;
 });
+        if (!appPlan) {
+    // Default Monthly set only if appPlan nahi aaya
+    document.getElementById('btnPayNow').href =
+      `upi://pay?pa=${MY_UPI_ID}&pn=${MY_NAME}&am=149&tn=Premium Monthly&cu=INR`;
+        }
         // Default Monthly (₹149) set kar do
 //document.getElementById('btnPayNow').href = `upi://pay?pa=${MY_UPI_ID}&pn=${MY_NAME}&am=149&tn=Premium Monthly&cu=INR`;
 
