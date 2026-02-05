@@ -183,6 +183,26 @@
     box-shadow: none;
     transform: none;
         }
+        /* UPI PAYMENT BUTTON STYLE */
+.btn-upi {
+    background: linear-gradient(135deg, #2563EB, #1D4ED8); /* Royal Blue Gradient */
+    color: white;
+    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 20px;
+    font-size: 18px; /* Bada Text */
+    letter-spacing: 0.5px;
+}
+
+.btn-upi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(37, 99, 235, 0.6);
+    filter: brightness(1.1);
+}
+
+.btn-upi i {
+    font-size: 22px; /* Wallet Icon Bada */
+}
     </style>
 </head>
 <body>
@@ -255,7 +275,7 @@
                 <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Click ID to Copy. Screenshot your payment.</p>
             </div>
             <!-- DIRECT UPI PAYMENT BUTTON -->
-<a id="btnPayNow" href="#" class="btn" style="background: #2563EB; color: white; margin-bottom: 15px;">
+<a id="btnPayNow" href="#" class="btn-upi" style="background: #2563EB; color: white; margin-bottom: 15px;">
     <i class="fas fa-wallet"></i> PAY VIA UPI APP
 </a>
 
@@ -483,11 +503,25 @@ const verifyBtn = document.getElementById('verifyBtn');
 termsCheckbox.addEventListener('change', () => {
     verifyBtn.disabled = !termsCheckbox.checked;
 });
-        if (!appPlan) {
-    // Default Monthly set only if appPlan nahi aaya
-    document.getElementById('btnPayNow').href =
-      `upi://pay?pa=${MY_UPI_ID}&pn=${MY_NAME}&am=149&tn=Premium Monthly&cu=INR`;
-        }
+        // --- AUTO-SELECT LOGIC (Fix for App Redirect) ---
+
+// 1. URL se Plan padho
+const urlParams = new URLSearchParams(window.location.search);
+const urlPlan = urlParams.get('plan'); // e.g. "Weekly"
+
+// 2. Logic: Konsa box click karna hai?
+if (urlPlan && urlPlan.toLowerCase().includes("weekly")) {
+    // Agar app se Weekly aaya, toh Weekly dabao
+    document.getElementById('planWeekly').click();
+} 
+else if (urlPlan && (urlPlan.toLowerCase().includes("life") || urlPlan.toLowerCase().includes("yearly"))) {
+    // Agar app se Lifetime aaya, toh Lifetime dabao
+    document.getElementById('planYearly').click();
+} 
+else {
+    // Agar kuch nahi aaya ya Monthly aaya, toh Monthly dabao (Default)
+    document.getElementById('planMonthly').click();
+                }
         // Default Monthly (₹149) set kar do
 //document.getElementById('btnPayNow').href = `upi://pay?pa=${MY_UPI_ID}&pn=${MY_NAME}&am=149&tn=Premium Monthly&cu=INR`;
 
