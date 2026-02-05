@@ -184,13 +184,13 @@
     transform: none;
         }
         /* UPI PAYMENT BUTTON STYLE */
-.btn-upi {
-    background: linear-gradient(135deg, #2563EB, #1D4ED8); /* Royal Blue Gradient */
+/* .btn-upi {
+    background: linear-gradient(135deg, #2563EB, #1D4ED8); /* Royal Blue Gradient 
     color: white;
     box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
     border: 1px solid rgba(255,255,255,0.1);
     margin-bottom: 20px;
-    font-size: 18px; /* Bada Text */
+    font-size: 18px; /* Bada Text 
     letter-spacing: 0.5px;
 }
 
@@ -201,7 +201,34 @@
 }
 
 .btn-upi i {
-    font-size: 22px; /* Wallet Icon Bada */
+    font-size: 22px; /* Wallet Icon Bada 
+} */
+        .btn-upi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #2563EB, #1D4ED8);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-upi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+    filter: brightness(1.1);
+}
+
+.btn-upi i {
+    font-size: 18px;
 }
     </style>
 </head>
