@@ -118,6 +118,16 @@
             .container { margin: 20px auto; padding: 15px; }
             h1 { font-size: 2rem; }
         }
+        .instructions {
+    margin-bottom: 30px;
+    padding-left: 18px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+.instructions li {
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
     </style>
 </head>
 <body>
@@ -189,6 +199,16 @@
                 </div>
                 <p style="font-size: 0.8rem; color: #666; margin-top: 10px;">Click ID to Copy. Screenshot your payment.</p>
             </div>
+
+            <!-- 🔽 ADD HERE -->
+<span class="step-label">04. INSTRUCTIONS</span>
+<ul class="instructions">
+    <li>Scan QR & complete payment</li>
+    <li>Take screenshot of successful payment</li>
+    <li>Click “Verify & Get Code”</li>
+    <li>Fill Google Form correctly</li>
+    <li>Premium activates within 1–6 hours</li>
+</ul>
 
             <!-- STEP 4: ACTION -->
             <button onclick="submitForm()" class="btn-verify">
