@@ -428,7 +428,17 @@ const MY_NAME = "Note Pad Pro";
     let upiLink = `upi://pay?pa=${MY_UPI_ID}&pn=${MY_NAME}&am=${amount}&tn=Premium ${name}&cu=INR`;
     
     // 3. Button par link set karo
-    document.getElementById('btnPayNow').href = upiLink;
+    //document.getElementById('btnPayNow').href = upiLink;
+            document.getElementById('btnPayNow').onclick = function(e) {
+    e.preventDefault();
+
+    let opened = window.location.href = upiLink;
+
+    // 1 second baad check karo
+    setTimeout(() => {
+        alert("⚠️ No UPI App Detected!\n\nPlease install any UPI app like:\n• Google Pay\n• PhonePe\n• Paytm\n• BHIM\n\nThen try again.");
+    }, 2000);
+};
     
     // Button ka text bhi update kar sakte ho (Optional)
     document.getElementById('btnPayNow').innerHTML = `<i class="fas fa-wallet"></i> PAY ₹${amount} NOW`;
