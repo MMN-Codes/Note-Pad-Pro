@@ -8,19 +8,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&display=swap" rel="stylesheet">
 
     <style>
-        :root { --bg: #000212; --primary: #3b82f6; --text: #ffffff; --glass: rgba(255,255,255,0.05); }
+        :root { --bg: #000212; --primary: #3b82f6; --text: #ffffff; --glass: rgba(255,255,255,0.05); --banner-h: 60px; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { background-color: var(--bg); color: var(--text); font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+
+        /* NEW SITE MIGRATION BANNER */
+        #migration-banner {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 10002;
+            background: linear-gradient(90deg, var(--primary), #8b5cf6);
+            color: white; text-align: center; padding: 12px 16px;
+            font-size: 0.85rem; font-weight: 500; cursor: pointer;
+        }
+        #migration-banner a { color: white; text-decoration: underline; font-weight: 700; }
+        #migration-banner .close-banner {
+            position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.2); border: none; color: white;
+            width: 22px; height: 22px; border-radius: 50%; font-size: 0.8rem;
+            line-height: 22px; text-align: center; cursor: pointer;
+        }
 
         /* CURSOR */
         .cursor-dot { width: 8px; height: 8px; background: white; position: fixed; border-radius: 50%; z-index: 9999; pointer-events: none; }
         .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.5); position: fixed; border-radius: 50%; z-index: 9999; pointer-events: none; transition: 0.1s; }
 
         /* LAYOUT */
-        .container { display: flex; max-width: 1200px; margin: 0 auto; padding: 100px 20px; gap: 50px; }
+        .container { display: flex; max-width: 1200px; margin: 0 auto; padding: calc(100px + var(--banner-h)) 20px 100px; gap: 50px; }
         
         /* SIDEBAR */
-        .sidebar { flex: 1; position: sticky; top: 100px; height: fit-content; display: none; }
+        .sidebar { flex: 1; position: sticky; top: calc(100px + var(--banner-h)); height: fit-content; display: none; }
         .sidebar ul { list-style: none; border-left: 2px solid rgba(255,255,255,0.1); padding-left: 20px; }
         .sidebar li { margin-bottom: 20px; }
         .sidebar a { text-decoration: none; color: #64748b; transition: 0.3s; display: block; font-size: 0.9rem; }
@@ -48,6 +63,13 @@
 </head>
 <body>
 
+    <div id="migration-banner" onclick="window.location.href='https://note-pad-pro.vercel.app/'">
+        🚀 We've launched a brand new site — visit
+        <a href="https://note-pad-pro.vercel.app/" onclick="event.stopPropagation()">note-pad-pro.vercel.app</a>
+        for the latest experience →
+        <button class="close-banner" onclick="event.stopPropagation(); document.getElementById('migration-banner').style.display='none'; document.documentElement.style.setProperty('--banner-h','0px');">✕</button>
+    </div>
+
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
@@ -56,98 +78,110 @@
         <div class="sidebar">
             <ul>
                 <li><a href="#intro" class="active">1. Introduction</a></li>
-                <li><a href="#permissions">2. Permissions & Usage</a></li>
-                <li><a href="#data">3. Data & Storage</a></li>
-                <li><a href="#ads">4. Third-Party Services</a></li>
-                <li><a href="#security">5. Security</a></li>
-                <li><a href="#contact">6. Contact Us</a></li>
+                <li><a href="#permissions">2. Permissions We Use</a></li>
+                <li><a href="#data">3. Data Security & Backups</a></li>
+                <li><a href="#ads">4. Advertising</a></li>
+                <li><a href="#premium">5. Premium Access & Rewards</a></li>
+                <li><a href="#children">6. Children's Privacy</a></li>
+                <li><a href="#changes">7. Changes to This Policy</a></li>
+                <li><a href="#contact">8. Contact Us</a></li>
             </ul>
         </div>
 
         <!-- Main Content -->
         <div class="content">
             <h1>Privacy Policy</h1>
-            <span class="last-updated">LAST UPDATED: JANUARY 2026</span>
+            <span class="last-updated">LAST UPDATED: JULY 2026</span>
 
             <div id="intro" class="policy-card">
-                <h2><i class="fas fa-info-circle"></i> Introduction</h2>
+                <h2><i class="fas fa-info-circle"></i> 1. Introduction</h2>
                 <p>
-Welcome to <strong>Note Pad Pro</strong>. We are committed to providing a secure, simple, and privacy-focused note-taking experience.  
-This app follows a <strong>local-first approach</strong>, which means your notes are stored on your device and remain under your control.
+Welcome to <strong>Note Pad Pro</strong>. Your privacy is important to us. The app follows an offline-first approach — your notes are stored locally on your device, and no account or sign-up is required to use the core app.
 </p>
             </div>
 
             <div id="permissions" class="policy-card">
-                <h2><i class="fas fa-key"></i> Permissions We Request</h2>
-                <p>To provide advanced features, the app requires specific permissions. We only request these when you use the respective feature:</p>
+                <h2><i class="fas fa-key"></i> 2. Permissions We Use</h2>
+                <p>Note Pad Pro requests permissions only when they are needed for specific features. Depending on the features you use, these may include:</p>
                 <ul>
                     <li>
-    <strong>Photos / Media Access:</strong>
-    The app allows users to select images from their device gallery
-    for features such as text extraction or image-based tools.
-    Images are processed locally on the device and are never uploaded
-    to any server.
+    <strong>Photos / Media:</strong>
+    Used to select images from your device when a feature requires them, and to save backup files, PDF documents, or images. Selected images are processed on the device and are not uploaded to our servers.
 </li>
                     <li>
-<strong>Display Over Other Apps (Overlay):</strong> 
-Used exclusively for the optional <em>Floating Note</em> feature, allowing you to view or edit notes while using other apps.
+<strong>Display Over Other Apps:</strong> 
+Used by the optional <em>Floating Note</em> feature so you can view or work with a note while using another app.
 </li>
                     <li>
-<strong>Storage / Media:</strong> 
-Used to export notes as PDF, save backup files (JSON), and store shared images on your device. 
-We do not access unrelated files.
+<strong>Notifications & Alarms:</strong> 
+Used for note reminders and sticky notifications. On supported Android versions, the app may request the Alarms & Reminders permission so reminders can trigger at the exact time you set.
 </li>
                     <li>
-<strong>Biometric / Fingerprint:</strong> 
-Used only to authenticate access to the app. 
-Biometric data is handled securely by the Android system and is never stored or accessed by us.
+<strong>Biometric Authentication:</strong> 
+Used to lock and unlock the app and, optionally, individual notes using your device's fingerprint, face unlock, or system screen lock. Note Pad Pro does not see, store, or transmit your biometric data — authentication is handled by Android's secure biometric system.
 </li>
                     <li>
-<strong>Notifications:</strong> 
-Used for note reminders and optional sticky notifications. 
-You can disable notifications anytime from system settings.
+<strong>Battery Optimization Exemption:</strong> 
+May be requested optionally to help reminders work reliably when the app is closed. This is not required unless you choose to use reminders.
 </li>
                 </ul>
             </div>
 
             <div id="data" class="policy-card">
-                <h2><i class="fas fa-database"></i> Data & Storage</h2>
+                <h2><i class="fas fa-database"></i> 3. Data Security & Backups</h2>
                 <ul>
-                    <li><strong>Local Database:</strong> All notes, passwords, and hidden data are stored in an encrypted SQLite database inside your phone.</li>
-                    <li><strong>No Cloud Sync:</strong> We do not have access to your notes. We do not upload your content to any cloud server.</li>
-                    <li>
-<strong>Manual Backup:</strong> 
-The app allows you to manually create backup files that you may choose to store locally or upload to services like Google Drive.
-We do not manage or access these backups.
-</li>
+                    <li>Your notes remain on your device by default. We do not collect or sell your personal notes.</li>
+                    <li>Note Pad Pro does not require an account and does not provide cloud synchronization for your notes.</li>
+                    <li>The app maintains an automatic local backup on your device as a safety measure against accidental data loss. This local backup is removed when the app is uninstalled.</li>
+                    <li>You can also manually create a backup file and save it wherever you choose, including third-party cloud storage such as Google Drive, using your device's file picker.</li>
+                    <li>We do not operate, access, or have visibility into third-party cloud storage where you choose to keep your backup files. Those services handle your data according to their own privacy policies.</li>
+                    <li>Notes moved to the Recycle Bin are automatically and permanently deleted after 30 days. You can restore a deleted note at any time before permanent deletion.</li>
                 </ul>
             </div>
 
             <div id="ads" class="policy-card">
-                <h2><i class="fas fa-ad"></i> Third-Party Services</h2>
+                <h2><i class="fas fa-ad"></i> 4. Advertising</h2>
                 <p>
-The free version of the app may display advertisements to support development.
+Note Pad Pro is supported by advertising through <strong>Google AdMob</strong>. AdMob may collect device identifiers, such as the Google Advertising ID, and usage data to provide and measure advertising, including personalized advertising where permitted.
 </p>
-<ul>
-<li>
-<strong>Start.io:</strong> 
-Used to show ads. Data collection, if any, is governed by Start.io’s own privacy policy.
-</li>
-                    <li><strong>External Tools:</strong> Features like "Cloud Tools" may open external websites (e.g., ChatGPT) inside a secure browser. These sites are governed by their own privacy policies.</li>
-                </ul>
+<p style="margin-top: 15px;">
+In the European Economic Area and United Kingdom, we ask for your consent before showing personalized ads where required by applicable privacy regulations. You can review or withdraw advertising-related consent from within the app.
+</p>
+<p style="margin-top: 15px;">
+For more information about how Google handles data, please review Google's Privacy Policy.
+</p>
             </div>
 
-            <div id="security" class="policy-card">
-                <h2><i class="fas fa-shield-alt"></i> Security</h2>
+            <div id="premium" class="policy-card">
+                <h2><i class="fas fa-crown"></i> 5. Premium Access & Rewards</h2>
                 <p>
-We use built-in Android security features such as Biometric Authentication and local data protection mechanisms.
-However, overall security also depends on your device settings and screen lock configuration.
+Certain features may be unlocked temporarily by watching a rewarded video advertisement or by using an invite code shared by another user.
+</p>
+<p style="margin-top: 15px;">
+These options do not require payment information. Note Pad Pro does not process or store financial or card details within the app.
+</p>
+            </div>
+
+            <div id="children" class="policy-card">
+                <h2><i class="fas fa-child"></i> 6. Children's Privacy</h2>
+                <p>
+Note Pad Pro is a general-purpose application and is not specifically designed or marketed to children under 13. The app does not knowingly collect personal information from children.
+</p>
+<p style="margin-top: 15px;">
+If you are a parent or guardian and believe a child has provided personal information through the app, please contact us so we can address the matter.
+</p>
+            </div>
+
+            <div id="changes" class="policy-card">
+                <h2><i class="fas fa-clock-rotate-left"></i> 7. Changes to This Policy</h2>
+                <p>
+We may update this Privacy Policy from time to time to reflect changes to the app, our practices, or applicable laws. The "Last updated" date at the top of this page will be updated when changes are made.
 </p>
             </div>
 
             <div id="contact" class="policy-card">
-                <h2><i class="fas fa-envelope"></i> Contact Us</h2>
-                <p>If you have any questions about this policy or need support, please contact us:</p>
+                <h2><i class="fas fa-envelope"></i> 8. Contact Us</h2>
+                <p>For questions about this Privacy Policy or your data, contact us at:</p>
                 <p style="color: var(--primary); font-weight: bold;">all4you598@gmail.com</p>
             </div>
         </div>
