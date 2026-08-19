@@ -15,6 +15,7 @@
             --purple: #8b5cf6;
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.08);
+            --banner-h: 44px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
@@ -26,9 +27,26 @@
             overflow-x: hidden;
         }
 
+        /* --- NEW SITE MIGRATION BANNER --- */
+        #migration-banner {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 10002;
+            background: linear-gradient(90deg, var(--primary), var(--purple));
+            color: white; text-align: center; padding: 12px 16px;
+            font-size: 0.85rem; font-weight: 500; cursor: pointer;
+        }
+        #migration-banner a {
+            color: white; text-decoration: underline; font-weight: 700;
+        }
+        #migration-banner .close-banner {
+            position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+            background: rgba(255,255,255,0.2); border: none; color: white;
+            width: 22px; height: 22px; border-radius: 50%; font-size: 0.8rem;
+            line-height: 22px; text-align: center; cursor: pointer;
+        }
+
         /* --- SCROLL PROGRESS BAR --- */
         #progress-bar {
-            position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(to right, var(--cyan), var(--purple));
+            position: fixed; top: var(--banner-h); left: 0; height: 3px; background: linear-gradient(to right, var(--cyan), var(--purple));
             width: 0%; z-index: 10001; transition: width 0.1s;
         }
 
@@ -51,7 +69,7 @@
         /* --- NAVBAR --- */
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5%; position: fixed; width: 100%; z-index: 100;
+            padding: 20px 5%; position: fixed; top: var(--banner-h); width: 100%; z-index: 100;
             background: rgba(0, 2, 18, 0.6); backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
         }
@@ -75,7 +93,7 @@
         /* --- HERO SECTION --- */
         header {
             min-height: 100vh; display: flex; align-items: center; justify-content: space-between;
-            padding: 100px 5% 0; position: relative;
+            padding: calc(100px + var(--banner-h)) 5% 0; position: relative;
         }
 
         .hero-text { max-width: 600px; z-index: 2; }
@@ -155,10 +173,14 @@
         .download-strip h2 { margin-bottom: 20px; font-size: 2.5rem; }
 
         footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: #64748b; }
+        footer .new-site-note { margin-top: 14px; font-size: 0.85rem; }
+        footer .new-site-note a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        footer .new-site-note a:hover { text-decoration: underline; }
 
         @media (max-width: 768px) {
+            :root { --banner-h: 64px; }
             h1 { font-size: 3rem; }
-            header { flex-direction: column; text-align: center; padding-top: 120px; }
+            header { flex-direction: column; text-align: center; padding-top: calc(120px + var(--banner-h)); }
             .hero-visual { width: 100%; margin-top: 50px; }
             .float-card { display: none; } /* Mobile pe cards chhupa diye taaki clutter na ho */
             .cursor, .cursor-dot { display: none; }
@@ -279,6 +301,14 @@
 </head>
 <body>
 
+    <!-- NEW SITE MIGRATION BANNER -->
+    <div id="migration-banner" onclick="window.location.href='https://note-pad-pro.vercel.app/'">
+        🚀 We've launched a brand new site — visit
+        <a href="https://note-pad-pro.vercel.app/" onclick="event.stopPropagation()">note-pad-pro.vercel.app</a>
+        for the latest experience →
+        <button class="close-banner" onclick="event.stopPropagation(); document.getElementById('migration-banner').style.display='none'; document.documentElement.style.setProperty('--banner-h','0px');">✕</button>
+    </div>
+
     <!-- SCROLL BAR -->
     <div id="progress-bar"></div>
 
@@ -299,7 +329,7 @@
 
     <header>
         <div class="hero-text">
-            <span class="hero-tag">Version 1.1.1 Released</span>
+            <span class="hero-tag">Version 1.2 · Latest Update</span>
                 
                 <!-- PLATFORM AVAILABILITY -->
 <div id="platforms" class="platforms">
@@ -326,18 +356,6 @@
                 Designed for speed and privacy.
             </p>
             <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-
-                <!--
-                <a href="https://github.com/MMN-Codes/Note-Pad-Pro/releases/latest/download/NotePadPro.apk" class="btn-glow">
-                    <i class="fab fa-android"></i> Direct APK Download
-                </a>
-                <a href="https://apkpure.net/note-pad-pro/mmn.notepadpro.app"
-   class="btn-glow"
-   target="_blank" rel="noopener">
-    <img src="https://img.icons8.com/?size=100&id=Bzg1ypKokEGa&format=png&color=000000"
-         style="width:22px;vertical-align:middle;margin-right:8px;">
-    Get it on APKPure
-</a> -->
                 <a href="#features" style="padding: 12px 30px; border: 1px solid var(--border); border-radius: 50px; text-decoration: none; color: white;">
                     Explore Features
                 </a>
@@ -380,34 +398,49 @@
     <section id="features" class="features">
         <div class="grid">
             <div class="card">
-                <i class="fas fa-shield-alt"></i>
-                <h3>Military Grade Security</h3>
-                <p>Lock your secrets with system-level Fingerprint and Lock integration.</p>
+                <i class="fas fa-fingerprint"></i>
+                <h3>Biometric Lock</h3>
+                <p>Protect the app or individual notes with your device's fingerprint or system screen lock.</p>
             </div>
             <div class="card">
                 <i class="fas fa-bell"></i>
                 <h3>Sticky Notifications</h3>
-                <p>Pin notes to your notification shade. It's impossible to forget tasks now.</p>
+                <p>Keep important notes visible in your notification shade for quick access whenever you need them.</p>
             </div>
             <div class="card">
                 <i class="fas fa-file-export"></i>
-                <h3>One-Click PDF</h3>
-                <p>Turn messy notes into professional documents instantly.</p>
+                <h3>PDF Export</h3>
+                <p>Export your notes as PDF files for saving, sharing, or keeping a clean copy.</p>
             </div>
             <div class="card">
                 <i class="fas fa-trash-undo"></i>
-                <h3>Safety Net</h3>
-                <p>Deleted by mistake? Our Recycle Bin has got your back.</p>
+                <h3>Recycle Bin</h3>
+                <p>Deleted notes stay in the recycle bin so you can recover them before permanent deletion.</p>
             </div>
             <div class="card">
-                <i class="fas fa-qrcode"></i>
-                <h3>Scan & Share</h3>
-                <p>Generate QR codes for instant note sharing between devices.</p>
+                <i class="fas fa-share-nodes"></i>
+                <h3>Easy Note Sharing</h3>
+                <p>Share your notes directly with other apps and people whenever you need to.</p>
             </div>
             <div class="card">
                 <i class="fas fa-adjust"></i>
                 <h3>Adaptive Dark Mode</h3>
                 <p>A stunning interface that respects your system preferences.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-link"></i>
+                <h3>Note Linking</h3>
+                <p>Link related notes together to move between connected information more easily.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-list-check"></i>
+                <h3>Batch Actions</h3>
+                <p>Select multiple notes at once and perform supported actions such as delete, share, and pin.</p>
+            </div>
+            <div class="card">
+                <i class="fas fa-database"></i>
+                <h3>Offline & Local Storage</h3>
+                <p>Your notes are stored locally on your device, so you can use the app without an account or cloud connection.</p>
             </div>
         </div>
     </section>
@@ -424,6 +457,10 @@
             <a href="privacy.html" style="color: #64748b; text-decoration: none; margin: 0 10px;">Privacy</a>
             <a href="terms.html" style="color: #64748b; text-decoration: none; margin: 0 10px;">Terms</a>
             <a href="contact.html" style="color: #64748b; text-decoration: none; margin: 0 10px;">Contact</a>
+        </p>
+        <p class="new-site-note">
+            This site is being retired — the new official site is
+            <a href="https://note-pad-pro.vercel.app/">note-pad-pro.vercel.app</a>
         </p>
     </footer>
 
